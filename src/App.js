@@ -9,6 +9,7 @@ import Navigation from './componets/Navigation';
 import Footer from './componets/Footer';
 import About from './pages/About';
 import Book from './pages/Book';
+import Showcase from './pages/Showcase';
 
 export class App extends Component {
  
@@ -23,10 +24,7 @@ export class App extends Component {
         <Route exact path="/eve_book" render={props =>(<Book/> )}/>
         {/* Index page route */}
         <Route exact path="/" component={() => 
-        <Fragment>
-           <Navigation/>
-      <Footer/>
-          </Fragment>
+          <Showcase/>
         } />
      
       </Switch>

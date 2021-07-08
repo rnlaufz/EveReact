@@ -18,9 +18,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
                     <li class="list-group-item"><Link to="/eve_book">Book</Link></li>
                 </div>
                 <div id="group-two">
-                    <li><a href="#"><FontAwesomeIcon icon={faFacebook}/></a></li>
-                    <li><a href="#"><FontAwesomeIcon icon={faInstagram}/></a></li>
-                    <li><a href="#"><FontAwesomeIcon icon={faTwitter}/></a></li>
+                    <li><Link><FontAwesomeIcon icon={faFacebook}/></Link></li>
+                    <li><Link><FontAwesomeIcon icon={faInstagram}/></Link></li>
+                    <li><Link><FontAwesomeIcon icon={faTwitter}/></Link></li>
                 </div>
             </ul>
         </nav>

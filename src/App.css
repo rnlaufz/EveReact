@@ -10,7 +10,23 @@
   padding: 0;
 }
 
-html, body {
+html{
+  height: 100%;
+  width: 100%;
+  background: none;
+}
+
+body{
+  width: 100vw;
+  height: 100vh;
+  font-family: 'Fira Sans', sans-serif;
+  overflow-x: hidden;
+  background: none;
+  background-color: rgba(20, 34, 53, 0.960);
+  background-blend-mode: normal;
+}
+
+/* html, body {
   position: absolute;
   top: 0;
   left: 0;
@@ -21,7 +37,7 @@ html, body {
   height: 100vh;
   overflow: hidden;
 
-}
+} */
 
 ul {
     list-style-type: none;
@@ -322,7 +338,7 @@ outline: none;
 
 /* Index page */
 .container{
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   margin: auto;
   text-align: center;
@@ -333,7 +349,7 @@ outline: none;
 
 .content-container {
   width: 100%;
-  height: 100%;
+  height: 90%;
   text-align: center;
   display: flex;
   align-items: center;
@@ -387,8 +403,8 @@ font-weight: bold;
 /* About page */
 .about-container {
   margin: auto;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   background: none;
   background-color: rgba(20, 33, 53, 0.960);
   background-blend-mode: normal;
@@ -483,8 +499,8 @@ font-weight: bold;
 
 /* Book page */
 .book-container {
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -699,4 +715,173 @@ form button[type="submit"]:disabled:hover{
   font-size: 14px;
   color: #F1A009;
  
+}
+
+/* Not found page */
+.not-found-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  background-color: #1D293C;
+}
+
+.not-found-container p {
+  color: #fff;
+}
+
+.upper {
+  text-transform: uppercase;
+  padding: 10px;
+  font-size: 200%;
+}
+
+.hyper-text {
+  color: #F1A009;
+  font-size: 600%;
+}
+
+.not-found-info{
+  width: 40%;
+  text-align: center;
+}
+
+@media(max-width: 1200px){
+
+  /* Book page card */
+  .card {
+      width: 80%;
+      height: 95%;
+  }
+
+ 
+}
+
+
+@media(max-width: 1420px){
+  /* Img gallery modal */
+.img-modal-content .img-gallery img {
+width: 100%;
+height: 90%;   
+padding: 40px;
+}}
+
+/* For mobile devises */
+
+@media(max-width:541px){
+  h1, h2 {
+      font-size: 24px !important;
+      letter-spacing: 5px;
+  }
+
+ .content h2 {
+     font-size: 18px !important;
+      text-transform: none;
+  }
+
+  h3, a {
+      font-size: 16px;
+  }
+
+  p {
+      font-size: 14px;
+  }
+
+  .desc div p {
+      padding: 0;
+  }
+
+  #dates h3, #selector h3 ,.summary-container h4 {
+      font-size: 24px;
+  }
+
+  #arrival, #departure {
+      margin: 10px 0px
+  }
+
+  .house-description-item, .btn {
+      font-size: 16px;
+  }
+
+  .list-group {
+      flex-direction: column;
+      justify-content: center;
+      text-align: center;
+      
+  }
+
+  #group-one, #group-two {
+      margin: auto;
+   }
+
+   #group-one {
+       padding-bottom: 0;
+   }
+
+   .list-group {
+       flex-direction: column;
+       justify-content: center;
+       text-align: center;
+       
+   }
+
+  .modal {
+      width: 80%;
+  }
+  
+
+}
+
+@media(max-width:361px){
+  h1, h2 {
+      font-size: 18px !important;
+      letter-spacing: 5px;
+  }
+
+ .content h2 {
+     font-size: 14px !important;
+      text-transform: none;
+  }
+
+  h3, a {
+      font-size: 12px;
+  }
+
+  p {
+      font-size: 10px;
+  }
+
+  .desc div p {
+      padding: 0;
+  }
+
+  #dates h3, #selector h3 ,.summary-container h4 {
+      font-size: 16px;
+  }
+
+  #arrival, #departure {
+      margin: 5px 0px
+  }
+
+  .house-description-item, .btn, #selected-more, .form-list-group-item {
+      font-size: 12px !important;
+  }
+
+  #selected-more {
+      margin-top: 5px !important;
+  }
+
+  .modal {
+      width: 80%;
+      height: 90%;
+  }
+  
+  footer p{
+      text-align: center;
+      right: 10%;
+  }
+
 }

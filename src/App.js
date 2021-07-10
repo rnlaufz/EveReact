@@ -8,6 +8,7 @@ import store from './store';
 import About from './pages/About';
 import Book from './pages/Book';
 import Showcase from './pages/Showcase';
+import NotFound from './componets/NotFound';
 
 export class App extends Component {
  
@@ -24,6 +25,8 @@ export class App extends Component {
         <Route exact path="/" component={() => 
           <Showcase/>
         } />
+        {/* Index page route */}
+        <Route component={NotFound} />
      
       </Switch>
       </Router>

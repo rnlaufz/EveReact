@@ -1,8 +1,56 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import Footer from '../componets/Footer';
 import Navigation from '../componets/Navigation';
 
 const Book = () => {
+
+    const [formData, setFormData] = useState({
+        arrival:  "",
+        departure: "",
+        amountOfDays: ''
+    });
+
+    const {arrival, departure, amountOfDays} = formData;
+
+    // If arrival or departure days get changed, days counted
+    useEffect(() => {
+        countDays()
+    }, [arrival, departure])
+
+  
+
+    // Prevent selecting past days
+    let currentDate = new Date()
+    const preventPast = (date) => {
+        let today = new Date();
+        let month = '' + (today.getMonth() + 1);
+        let day = '' + today.getDate();
+        let year = today.getFullYear();
+
+    if(month.length < 2){
+        month = '0' + month;
+    }    
+
+    if(day.length < 2) {
+        day = '0' + day;
+    }
+
+    return [year, month, day].join('-');
+    }
+
+    const minDate = preventPast(currentDate);
+
+    // Get arrival and departure days
+    const getDays =  e => setFormData({...formData, [e.target.name]: e.target.value});
+
+    // Count days
+    const countDays = () => {
+            let arrDay = new Date(arrival);
+            let depDay = new Date(departure);
+            setFormData({...formData, amountOfDays: (depDay - arrDay) / (1000 * 3600 * 24)});
+    }
+
+
     return (
         <div className="book-container">
             <Navigation/>
@@ -14,8 +62,8 @@ const Book = () => {
         <div id="dates" className="dates-form-group">
             <h3>Select your dates:</h3>
             <div className="inputs-flex">
-            <input type="date" id="arrival"  name="arrival" />
-            <input type="date" id="departure"  name="departure" />
+            <input type="date" id="arrival"  name="arrival" min={minDate} value={arrival} onChange={e => getDays(e)}   />
+            <input type="date" id="departure"  name="departure" min={minDate} value={departure} onChange={e => getDays(e)}  />
         </div>
           </div>
           <div className="selector" id="selector">
@@ -46,7 +94,7 @@ const Book = () => {
             >
             <ul className="form-list-group" id="summary-list">
                 <li className="form-list-group-item">Dates: from <span id="arrival-date" className="underlined"></span> to <span id="departure-date" className="underlined"></span> </li>
-                <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">0</span></li>
+                <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">{amountOfDays ? amountOfDays : 0}</span></li>
                 <li className="form-list-group-item">Selected house: <span id="selected-house" className="underlined">Lake Cabin</span></li>
                 <li className="form-list-group-item">Address of house: <span id="address-of-selected-house" className="underlined">Neverland Lake, 02</span></li>
                 <li className="form-list-group-item">Price: <span id="total-price" className="underlined">0$</span></li>

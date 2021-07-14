@@ -7,10 +7,19 @@ const Book = () => {
     const [formData, setFormData] = useState({
         arrival:  "",
         departure: "",
-        amountOfDays: ''
+        amountOfDays: '',
+        house: 'Lake Cabin',
+        houseData: {
+            houseName: '',
+            pricePerDay: 0,
+            facilities: [],
+            occupied: false,
+            images: [],
+            bgImage: ''
+        }
     });
 
-    const {arrival, departure, amountOfDays} = formData;
+    const {arrival, departure, amountOfDays, house} = formData;
 
     // If arrival or departure days get changed, days counted
     useEffect(() => {
@@ -22,7 +31,7 @@ const Book = () => {
     // Prevent selecting past days
     let currentDate = new Date()
     const preventPast = (date) => {
-        let today = new Date();
+        let today = new Date(date);
         let month = '' + (today.getMonth() + 1);
         let day = '' + today.getDate();
         let year = today.getFullYear();
@@ -50,6 +59,16 @@ const Book = () => {
             setFormData({...formData, amountOfDays: (depDay - arrDay) / (1000 * 3600 * 24)});
     }
 
+    // Get house
+    const getHouse = (e) => {
+        setFormData({...formData, house: e.target.value});
+    }
+
+    // Send request with house title to get data from DB
+    const callHouseData = (title) => {
+        return true
+    }
+
 
     return (
         <div className="book-container">
@@ -68,7 +87,7 @@ const Book = () => {
           </div>
           <div className="selector" id="selector">
               <h3>Select your house:</h3>
-              <select name="options" id="options">
+              <select name="options" id="options" value={house} onChange={e=>getHouse(e)} >
                   <option value="Lake Cabin" id="cabin-one" className="default">Lake Cabin</option>
                   <option value="Woods Cabin" id="cabin-two">Woods Cabin</option>
                   <option value="Heels Cabin" id="cabin-three">Heels Cabin</option>
@@ -95,7 +114,7 @@ const Book = () => {
             <ul className="form-list-group" id="summary-list">
                 <li className="form-list-group-item">Dates: from <span id="arrival-date" className="underlined"></span> to <span id="departure-date" className="underlined"></span> </li>
                 <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">{amountOfDays ? amountOfDays : 0}</span></li>
-                <li className="form-list-group-item">Selected house: <span id="selected-house" className="underlined">Lake Cabin</span></li>
+                <li className="form-list-group-item">Selected house: <span id="selected-house" className="underlined">{house}</span></li>
                 <li className="form-list-group-item">Address of house: <span id="address-of-selected-house" className="underlined">Neverland Lake, 02</span></li>
                 <li className="form-list-group-item">Price: <span id="total-price" className="underlined">0$</span></li>
             </ul>

@@ -10,11 +10,25 @@ import Book from './pages/Book';
 import Showcase from './pages/Showcase';
 import NotFound from './componets/NotFound';
 
+import firebase from 'firebase/app'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import rrfConfig from './reducers/index.js'
+
+const rrfProps = {
+  firebase,
+  config: rrfConfig,
+  dispatch: store.dispatch
+  // createFirestoreInstance // <- needed if using firestore
+}
+
 export class App extends Component {
  
   render() {
     return (
+      // Implement redux store
       <Provider store={store}>
+        {/* Launch firebase */}
+        <ReactReduxFirebaseProvider {...rrfProps}>
       <Router>
       <Switch>
         {/* About route */}
@@ -30,6 +44,7 @@ export class App extends Component {
      
       </Switch>
       </Router>
+      </ReactReduxFirebaseProvider>
       </Provider>
     )
   }

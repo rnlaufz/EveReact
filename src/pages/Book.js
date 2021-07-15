@@ -9,6 +9,7 @@ const Book = () => {
         departure: "",
         amountOfDays: '',
         house: 'Lake Cabin',
+        houseTitles: [],
         houseData: {
             houseName: '',
             pricePerDay: 0,
@@ -87,6 +88,7 @@ const Book = () => {
           </div>
           <div className="selector" id="selector">
               <h3>Select your house:</h3>
+              {/* @TO_DO: REPLACE OPTIONS WITH LOOP FROM HOUSES ARRAY FROM DB */}
               <select name="options" id="options" value={house} onChange={e=>getHouse(e)} >
                   <option value="Lake Cabin" id="cabin-one" className="default">Lake Cabin</option>
                   <option value="Woods Cabin" id="cabin-two">Woods Cabin</option>

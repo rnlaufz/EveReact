@@ -4,21 +4,24 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import store from './store';
 
+// Import firebase configuration files
+import firebase from 'firebase/app'
+import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import rrfConfig from './reducers/index.js'
+
 // Import components
 import About from './pages/About';
 import Book from './pages/Book';
 import Showcase from './pages/Showcase';
 import NotFound from './componets/NotFound';
 
-import firebase from 'firebase/app'
-import { ReactReduxFirebaseProvider } from 'react-redux-firebase';
-import rrfConfig from './reducers/index.js'
 
+
+// Init firebase
 const rrfProps = {
   firebase,
   config: rrfConfig,
   dispatch: store.dispatch
-  // createFirestoreInstance // <- needed if using firestore
 }
 
 export class App extends Component {

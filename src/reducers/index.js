@@ -1,5 +1,5 @@
 import firebase from 'firebase/app'
-import { FirebaseReducer, ReactReduxFirebaseProvider } from 'react-redux-firebase';
+import { FirebaseReducer } from 'react-redux-firebase';
 import {combineReducers} from 'redux';
 
 const fbConfig = {}

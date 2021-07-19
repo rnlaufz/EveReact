@@ -7,24 +7,28 @@ const Book = () => {
     const [formData, setFormData] = useState({
         arrival:  "",
         departure: "",
-        amountOfDays: '',
+        amountOfDays: 0,
         house: 'Lake Cabin',
         houseTitles: [],
         houseData: {
-            houseName: '',
-            pricePerDay: 0,
-            facilities: [],
+            address: "Netherland Lake, 02",
+            houseName: 'Lake Cabin',
+            pricePerDay: 122,
+            facilities: ["plumbing", "electrisity", "telephone", "bath", "shower"],
             occupied: false,
             images: [],
             bgImage: ''
-        }
+        },
+        fullPrice: 0
     });
 
-    const {arrival, departure, amountOfDays, house} = formData;
+    const {arrival, departure, amountOfDays, house, houseData, fullPrice} = formData;
+    const {pricePerDay} = houseData;
 
     // If arrival or departure days get changed, days counted
     useEffect(() => {
-        countDays()
+        countDaysAndFullPrice()
+        // countFullPrice()
     }, [arrival, departure])
 
   
@@ -53,23 +57,34 @@ const Book = () => {
     // Get arrival and departure days
     const getDays =  e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    // Count days
-    const countDays = () => {
-            let arrDay = new Date(arrival);
-            let depDay = new Date(departure);
-            setFormData({...formData, amountOfDays: (depDay - arrDay) / (1000 * 3600 * 24)});
-    }
-
     // Get house
     const getHouse = (e) => {
         setFormData({...formData, house: e.target.value});
     }
 
-    // Send request with house title to get data from DB
-    const callHouseData = (title) => {
-        return true
+    // Count days and full price for rent
+    const countDaysAndFullPrice = () => {
+            let arrDay = new Date(arrival);
+            let depDay = new Date(departure);
+            setFormData({...formData, amountOfDays: Number.parseInt((depDay - arrDay) / (1000 * 3600 * 24)), fullPrice: Number.parseInt(((depDay - arrDay) / (1000 * 3600 * 24))*pricePerDay)});
+
     }
 
+  
+
+    // Send request with house title to get data from DB
+    // const callHouseData = (title) => {
+    //     return true
+    // }
+
+    // Count price for all days
+    // const countFullPrice = () => {
+    //      return setFormData({...formData, fullPrice: amountOfDays ? Number.parseInt((pricePerDay * amountOfDays)) : 0});
+    // } 
+
+    
+
+    // console.log([fullPrice, amountOfDays])
 
     return (
         <div className="book-container">
@@ -99,10 +114,10 @@ const Book = () => {
                     <div className="description">
                         <h4 id="selected-house-title">Lake Cabin</h4>
                         <ul className="house-description" id="selected-house-description">
-                            <li className="house-description-item" id="selected-house-address">Neverland Lake, 02</li>
-                            <li className="house-description-item" id="selected-house-price">200$ per day</li>
-                            <li className="house-description-item" id="selected-house-facilities">Facilities: plumbing, electrisity, telephone, bath</li>
-                            <li className="house-description-item" id="selected-house-occupied">Occupied: no</li>
+                            <li className="house-description-item" id="selected-house-address">{houseData.address}</li>
+                            <li className="house-description-item" id="selected-house-price">{houseData.pricePerDay}$ per day</li>
+                            <li className="house-description-item" id="selected-house-facilities">Facilities: {houseData.facilities.join(', ')}</li>
+                            <li className="house-description-item" id="selected-house-occupied">Occupied: {houseData.occupied === true ? 'yes' : 'no'}</li>
                         </ul>
                         <button id="selected-more" className="btn">View more</button>
                     </div>
@@ -114,11 +129,11 @@ const Book = () => {
             <div 
             >
             <ul className="form-list-group" id="summary-list">
-                <li className="form-list-group-item">Dates: from <span id="arrival-date" className="underlined"></span> to <span id="departure-date" className="underlined"></span> </li>
-                <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">{amountOfDays ? amountOfDays : 0}</span></li>
+                <li className="form-list-group-item">Dates: from <span id="arrival-date" className="underlined">{arrival}</span> to <span id="departure-date" className="underlined">{departure}</span> </li>
+                <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">{amountOfDays}</span></li>
                 <li className="form-list-group-item">Selected house: <span id="selected-house" className="underlined">{house}</span></li>
-                <li className="form-list-group-item">Address of house: <span id="address-of-selected-house" className="underlined">Neverland Lake, 02</span></li>
-                <li className="form-list-group-item">Price: <span id="total-price" className="underlined">0$</span></li>
+                <li className="form-list-group-item">Address of house: <span id="address-of-selected-house" className="underlined">{houseData.address}</span></li>
+                <li className="form-list-group-item">Price: <span id="total-price" className="underlined">{fullPrice}$</span></li>
             </ul>
         </div>
         </div>

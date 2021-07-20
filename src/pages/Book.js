@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import Contact from '../componets/Contact';
 import Footer from '../componets/Footer';
 import Navigation from '../componets/Navigation';
 
@@ -31,8 +32,6 @@ const Book = () => {
         // countFullPrice()
     }, [arrival, departure])
 
-  
-
     // Prevent selecting past days
     let currentDate = new Date()
     const preventPast = (date) => {
@@ -57,7 +56,7 @@ const Book = () => {
     // Get arrival and departure days
     const getDays =  e => setFormData({...formData, [e.target.name]: e.target.value});
 
-    // Get house
+    // Get selected house and call for house data
     const getHouse = (e) => {
         setFormData({...formData, house: e.target.value});
     }
@@ -70,21 +69,6 @@ const Book = () => {
 
     }
 
-  
-
-    // Send request with house title to get data from DB
-    // const callHouseData = (title) => {
-    //     return true
-    // }
-
-    // Count price for all days
-    // const countFullPrice = () => {
-    //      return setFormData({...formData, fullPrice: amountOfDays ? Number.parseInt((pricePerDay * amountOfDays)) : 0});
-    // } 
-
-    
-
-    // console.log([fullPrice, amountOfDays])
 
     return (
         <div className="book-container">
@@ -142,6 +126,7 @@ const Book = () => {
 </div>
 </div>
         <Footer/>
+        <Contact/>
         </div>
     )
 }

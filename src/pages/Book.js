@@ -114,10 +114,10 @@ const Book = () => {
             >
             <ul className="form-list-group" id="summary-list">
                 <li className="form-list-group-item">Dates: from <span id="arrival-date" className="underlined">{arrival}</span> to <span id="departure-date" className="underlined">{departure}</span> </li>
-                <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">{amountOfDays}</span></li>
+                <li className="form-list-group-item">Amount of days: <span id="days-total" className="underlined">{amountOfDays ? amountOfDays : 0 }</span></li>
                 <li className="form-list-group-item">Selected house: <span id="selected-house" className="underlined">{house}</span></li>
                 <li className="form-list-group-item">Address of house: <span id="address-of-selected-house" className="underlined">{houseData.address}</span></li>
-                <li className="form-list-group-item">Price: <span id="total-price" className="underlined">{fullPrice}$</span></li>
+                <li className="form-list-group-item">Price: <span id="total-price" className="underlined">{fullPrice ? fullPrice : 0}$</span></li>
             </ul>
         </div>
         </div>

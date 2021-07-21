@@ -1,8 +1,13 @@
 import React from 'react';
 import Modal from 'react-modal'
- const Contact = () => {
+import {connect} from 'react-redux';
+import {callContactModel} from '../actions/contact'
+import {propTypes} from "prop-types"
+
+ const Contact = ({callContact:{callContact}}) => {
+     console.log(callContact)
     return (
-        <Modal isOpen={false} ariaHideApp={false}>
+        <Modal isOpen={callContact} ariaHideApp={false}>
              <div class="modal-container" id="modal">
             <div class="modal">
                 <button id="close" class="close-btn">X</button>
@@ -40,4 +45,10 @@ import Modal from 'react-modal'
 }
 
 
-export default Contact;
+
+const mapStateToProps = state => ({
+    callContact: state.contact
+})
+
+
+export default connect(mapStateToProps, {callContactModel})(Contact);

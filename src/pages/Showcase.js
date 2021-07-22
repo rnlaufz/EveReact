@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import Contact from '../componets/Contact'
 import Footer from '../componets/Footer'
 import Navigation from '../componets/Navigation'
 
@@ -20,6 +21,7 @@ const Showcase = () => {
       <Footer/>
         </div>
         </div>
+        <Contact/>
     </div>
 
     )

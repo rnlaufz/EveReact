@@ -18,6 +18,7 @@ import imgSix from '../dist/img/winter-bench.jpg';
 import imgSeven from '../dist/img/cabin-woods-green.jpeg';
 import imgEight from '../dist/img/yellow-cabin-winter-woods.jpeg';
 import imgNine from '../dist/img/cabin-forest-lake.jpeg';
+import Contact from '../componets/Contact';
 
  const About = () => {
     return (
@@ -75,6 +76,7 @@ import imgNine from '../dist/img/cabin-forest-lake.jpeg';
            </div>
        </div>
         <Footer/>
+        <Contact/>
     </div>
     )
 }

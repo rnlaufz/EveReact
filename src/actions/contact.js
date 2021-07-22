@@ -6,5 +6,5 @@ export const callContactModel = (callContact) => dispatch => {
         type: CALL_CONTACT,
         callContact: callContact
     })
-      
+      console.log(callContact)
    }

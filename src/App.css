@@ -120,6 +120,7 @@ color: #1D293C;
     position: relative;
 }
 
+
 /* Setting the line ::after (needed for underline animation) */
 #group-one li a::after{
     content: '';

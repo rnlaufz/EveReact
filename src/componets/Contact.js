@@ -1,16 +1,24 @@
 import React from 'react';
 import Modal from 'react-modal'
+import { useEffect, useState } from 'react';
+import {Link} from 'react-router-dom';
 import {connect} from 'react-redux';
 import {callContactModel} from '../actions/contact'
 import {propTypes} from "prop-types"
 
- const Contact = ({callContact:{callContact}}) => {
-     console.log(callContact)
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+ const Contact = ({contact:{callContact}, callContactModel}) => {
+
     return (
-        <Modal isOpen={callContact} ariaHideApp={false}>
+        <Modal isOpen={callContact} ariaHideApp={!callContact}>
              <div class="modal-container" id="modal">
             <div class="modal">
-                <button id="close" class="close-btn">X</button>
+                <button type="submit" id="close" class="close-btn" onClick={() => callContactModel(false)}><FontAwesomeIcon icon={faTimes} /></button>
                 <div class="modal-header">
                     <h1>Cozy Eve</h1>
                     <p>Leave your name and contact and we'll write you soon!</p>
@@ -33,9 +41,9 @@ import {propTypes} from "prop-types"
                         </form>
                     </div>
                     <ul id="media-icons">
-                        {/* <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                        <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="#"><i class="fab fa-twitter"></i></a></li> */}
+                        <li><a href="#"><FontAwesomeIcon icon={faFacebook} /></a></li>
+                        <li><a href="#"><FontAwesomeIcon icon={faInstagram} /></a></li>
+                        <li><a href="#"><FontAwesomeIcon icon={faTwitter} /></a></li>
                     </ul>
                 </div>
             </div>
@@ -47,7 +55,8 @@ import {propTypes} from "prop-types"
 
 
 const mapStateToProps = state => ({
-    callContact: state.contact
+    contact: state.contact,
+    callContact: state.callContact
 })
 
 

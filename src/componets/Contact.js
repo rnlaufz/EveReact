@@ -14,6 +14,19 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
  const Contact = ({contact:{callContact}, callContactModel}) => {
 
+    const [formData, setFormData]= useState({
+        fName: '',
+        lName: '',
+        email: ''
+    });
+
+    const {fName, lName, email} = formData;
+
+    const onChange = (e) => {
+        setFormData({...formData, [e.target.name]: e.target.value});
+
+    }
+
     return (
         <Modal isOpen={callContact} ariaHideApp={!callContact}>
              <div class="modal-container" id="modal">
@@ -27,13 +40,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
                     <div class="form-container">
                         <form id="contact-form">
                             <div>
-                            <input type="text" placeholder="Your First Name" class="form-control" />
+                            <input type="text" placeholder="Your First Name" class="form-control" name="fName" onChange={e => onChange(e)} />
                             </div>
                             <div>
-                            <input type="text" placeholder="Your Last Name" class="form-control"/>
+                            <input type="text" placeholder="Your Last Name" class="form-control" name="lName" onChange={e => onChange(e)}/>
                             </div>
                             <div>
-                            <input type="email" placeholder="Your Email" class="form-control"/>
+                            <input type="email" placeholder="Your Email" class="form-control" name="email" onChange={e => onChange(e)}/>
                             </div>
                             <div>
                             <input type="submit" value="Submit" class="form-control"/>

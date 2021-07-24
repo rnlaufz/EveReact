@@ -10,27 +10,49 @@ const Book = () => {
         departure: "",
         amountOfDays: 0,
         house: 'Lake Cabin',
-        houseTitles: [],
+        houseTitles: ['Lake Cabin', 'Woods Cabin', 'Heels Cabin'],
         houseData: {
             address: "Netherland Lake, 02",
             houseName: 'Lake Cabin',
             pricePerDay: 122,
             facilities: ["plumbing", "electrisity", "telephone", "bath", "shower"],
             occupied: false,
-            images: [],
-            bgImage: ''
+            // images: [],
+            // bgImage: ''
         },
         fullPrice: 0
     });
 
-    const {arrival, departure, amountOfDays, house, houseData, fullPrice} = formData;
+    const {arrival, departure, amountOfDays, houseTitles, house, houseData, fullPrice} = formData;
     const {pricePerDay} = houseData;
 
     // If arrival or departure days get changed, days counted
     useEffect(() => {
-        countDaysAndFullPrice()
+        getHouseData(house);
+        countDaysAndFullPrice();
         // countFullPrice()
-    }, [arrival, departure])
+    }, [arrival, departure, house]);
+
+    // Harcoded house data
+    const houses = [
+        {name:'Lake Cabin',
+        address: "Nether Land Lake 00",
+        pricePerDay: 103,
+        facilities: ["plumbing", "electrisity", "telephone", "bath", "shower"],
+        occupied: false
+    },
+        {name:'Woods Cabin',
+        address: "Nether Land Woods 02",
+        pricePerDay: 122,
+        facilities: ["plumbing", "electrisity", "telephone", "bath"],
+        occupied: false
+    },
+        {name:'Heels Cabin',
+        address: "Nether Land Heels 03",
+        pricePerDay: 202,
+        facilities: ["plumbing", "electrisity", "telephone", "bath", "shower", "internet"],
+        occupied: false
+    }];
 
     // Prevent selecting past days
     let currentDate = new Date()
@@ -61,15 +83,33 @@ const Book = () => {
         setFormData({...formData, house: e.target.value});
     }
 
-    // Count days and full price for rent
-    const countDaysAndFullPrice = () => {
-            let arrDay = new Date(arrival);
-            let depDay = new Date(departure);
-            setFormData({...formData, amountOfDays: Number.parseInt((depDay - arrDay) / (1000 * 3600 * 24)), fullPrice: Number.parseInt(((depDay - arrDay) / (1000 * 3600 * 24))*pricePerDay)});
+ 
 
+    // Hardcoded checking function 
+    const getHouseData = (title) => {
+        for(let i = 0; i < houseTitles.length; i++){
+            if(title === houses[i].name){
+                setFormData({...formData, houseData: {
+                    address: houses[i].address,
+                    houseName: title,
+                    pricePerDay: houses[i].pricePerDay,
+                    facilities: houses[i].facilities,
+                    occupied: houses[i].occupied
+                }});
+            }
+        }
+        console.log(title)
     }
 
+       // Count days and full price for rent
+       const countDaysAndFullPrice = () => {
+        let arrDay = new Date(arrival);
+        let depDay = new Date(departure);
+        setFormData({...formData, amountOfDays: Number.parseInt((depDay - arrDay) / (1000 * 3600 * 24)), fullPrice: Number.parseInt(((depDay - arrDay) / (1000 * 3600 * 24))*houseData.pricePerDay)});
 
+}
+
+console.log(fullPrice)
     return (
         <div className="book-container">
             <Navigation/>
@@ -87,16 +127,15 @@ const Book = () => {
           </div>
           <div className="selector" id="selector">
               <h3>Select your house:</h3>
-              {/* @TO_DO: REPLACE OPTIONS WITH LOOP FROM HOUSES ARRAY FROM DB */}
               <select name="options" id="options" value={house} onChange={e=>getHouse(e)} >
-                  <option value="Lake Cabin" id="cabin-one" className="default">Lake Cabin</option>
+                  {/* <option value="Lake Cabin" id="cabin-one" className="default">Lake Cabin</option>
                   <option value="Woods Cabin" id="cabin-two">Woods Cabin</option>
-                  <option value="Heels Cabin" id="cabin-three">Heels Cabin</option>
-                  
+                  <option value="Heels Cabin" id="cabin-three">Heels Cabin</option> */}
+                  {houseTitles.map(title => <option value={title}>{title}</option>)}
                 </select>
                 <div id="selected">
                     <div className="description">
-                        <h4 id="selected-house-title">Lake Cabin</h4>
+                        <h4 id="selected-house-title">{houseData.name}</h4>
                         <ul className="house-description" id="selected-house-description">
                             <li className="house-description-item" id="selected-house-address">{houseData.address}</li>
                             <li className="house-description-item" id="selected-house-price">{houseData.pricePerDay}$ per day</li>

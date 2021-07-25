@@ -28,10 +28,10 @@ const Book = () => {
 
     // If arrival or departure days get changed, days counted
     useEffect(() => {
-        getHouseData(house);
+        // getHouseData(house);
         countDaysAndFullPrice();
         // countFullPrice()
-    }, [arrival, departure, house]);
+    }, [arrival, departure, house, pricePerDay, houseData]);
 
     // Harcoded house data
     const houses = [
@@ -81,25 +81,36 @@ const Book = () => {
     // Get selected house and call for house data
     const getHouse = (e) => {
         setFormData({...formData, house: e.target.value});
-    }
-
- 
-
-    // Hardcoded checking function 
-    const getHouseData = (title) => {
         for(let i = 0; i < houseTitles.length; i++){
-            if(title === houses[i].name){
+            if(house === houses[i].name){
                 setFormData({...formData, houseData: {
                     address: houses[i].address,
-                    houseName: title,
+                    houseName: house,
                     pricePerDay: houses[i].pricePerDay,
                     facilities: houses[i].facilities,
                     occupied: houses[i].occupied
                 }});
             }
         }
-        console.log(title)
     }
+
+ 
+
+    // Hardcoded checking function 
+    // const getHouseData = (title) => {
+    //     for(let i = 0; i < houseTitles.length; i++){
+    //         if(title === houses[i].name){
+    //             setFormData({...formData, houseData: {
+    //                 address: houses[i].address,
+    //                 houseName: title,
+    //                 pricePerDay: houses[i].pricePerDay,
+    //                 facilities: houses[i].facilities,
+    //                 occupied: houses[i].occupied
+    //             }});
+    //         }
+    //     }
+    //     console.log(title)
+    // }
 
        // Count days and full price for rent
        const countDaysAndFullPrice = () => {
